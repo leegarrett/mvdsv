@@ -129,8 +129,7 @@ jobs:
             upload/releases/latest/${{ matrix.os }}/${{ matrix.arch }}/${BINARY}
           cp build/${{ matrix.target }}/${BINARY}.md5 \
             upload/releases/latest/${{ matrix.os }}/${{ matrix.arch }}/${BINARY}.md5
-          sftp -rp -o 'StrictHostKeyChecking no' -o 'UserKnownHostsFile /dev/null' -P ${{ secrets.SFTP_PORT }} \
-            ${{ secrets.SFTP_USERNAME }}@${{ secrets.SFTP_HOST }}:/releases <<< $'put -rp upload/releases/*'
+          find upload/
 
       - name: Deploy snapshot
         if: inputs.deploy_type == 'snapshot'
@@ -148,5 +147,4 @@ jobs:
             upload/snapshots/latest/${{ matrix.os }}/${{ matrix.arch }}/${BINARY}
           cp build/${{ matrix.target }}/${BINARY}.md5 \
             upload/snapshots/latest/${{ matrix.os }}/${{ matrix.arch }}/${BINARY}.md5
-          sftp -rp -o 'StrictHostKeyChecking no' -o 'UserKnownHostsFile /dev/null' -P ${{ secrets.SFTP_PORT }} \
-            ${{ secrets.SFTP_USERNAME }}@${{ secrets.SFTP_HOST }}:/snapshots <<< $'put -rp upload/snapshots/*'
+          find upload/
