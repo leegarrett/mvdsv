@@ -2,7 +2,6 @@ name: build and deploy snapshots
 on: [push]
 jobs:
   build:
-    if: github.repository == 'QW-Group/mvdsv'
     uses: ./.github/workflows/_build.yml
     with:
       deploy_type: snapshot
